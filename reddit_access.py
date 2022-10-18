@@ -1,15 +1,17 @@
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Get the access token and headers
 def get_token():
-    with open('reddit_cli.txt', 'r') as f:
-        client_id= f.read()
-    with open('reddit_sk.txt', 'r') as f:
-        secret_key= f.read()
+    client_id = os.getenv('client_id')
+    secret_key = os.getenv('secret_key')
+    password = os.getenv('reddit_pw')
 
     auth = requests.auth.HTTPBasicAuth(client_id, secret_key)
-    with open('reddit_me.txt', 'r') as f:
-        password = f.read()
 
     data = {'grant_type': 'password',
             'username': 'LPouels',
